@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jorden Hub</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="starLayer"></div>
+
+    <!-- 505 SECURITY ERROR (TEACHER TRAP) -->
+    <div id="banScreen" style="display:none;">
+        <h1>505 SECURITY ERROR</h1>
+        <h2>TEACHER DETECTED</h2>
+        <p>Access from @legacytraditionalschool.org has been permanently revoked.</p>
+        <input type="password" id="backdoor" onkeydown="unban(event)" placeholder="ADMIN BYPASS">
+    </div>
+
+    <!-- LOCK SCREEN -->
+    <div id="lockScreen">
+        <div class="lock-box" id="requestState">
+            <h1>Private Access</h1>
+            <p>Invite-only hub. Enter email to apply.</p>
+            <input type="email" id="dummyEmail" placeholder="your@email.com">
+            <button onclick="fakeRequest()">Request Access</button>
+            <p style="font-size: 0.7rem; color: #444; cursor: pointer; margin-top:10px;" onclick="showPasscodeState()">Already have a code?</p>
+        </div>
+        <div class="lock-box" id="passcodeState" style="display:none;">
+            <h1>Enter Code</h1>
+            <input type="password" id="finalCode" placeholder="••••••••">
+            <button onclick="checkFinalCode()">Unlock</button>
+            <button onclick="showRequestState()" style="background:none; color:#444;">Back</button>
+        </div>
+    </div>
+
+    <!-- BOOT SCREEN -->
+    <div id="boot" style="display:none;">
+        <h1>Players of Right Now</h1>
+        <p>made by your favorite person</p>
+    </div>
+
+    <!-- MAIN HUB -->
+    <div id="main" style="display:none;">
+        <div id="home">
+            <h1 id="hubTitle">Jorden Hub</h1>
+            <p>Welcome to the center of the universe.</p>
+        </div>
+
+        <!-- ARCADE -->
+        <div id="games" class="page">
+            <h2>Built-in Arcade</h2>
+            <div class="game-buttons">
+                <button onclick="playSnake()">🐍 Snake</button>
+                <button onclick="playPong()">🏓 Pong</button>
+                <button onclick="playDodge()">🚀 Dodge</button>
+            </div>
+            <canvas id="gameCanvas" width="400" height="400"></canvas>
+        </div>
+
+        <!-- PROXY -->
+        <div id="proxy" class="page">
+            <div style="display:flex; gap:5px; margin-bottom:10px;">
+                <input id="proxyInput" placeholder="Enter URL (google.com)...">
+                <button onclick="launchProxy()">Go</button>
+            </div>
+            <iframe id="proxyFrame"></iframe>
+        </div>
+
+        <!-- MUSIC -->
+        <div id="music" class="page">
+            <h2>Music Player</h2>
+            <iframe src="https://spotify.com" id="spotifyFrame"></iframe>
+        </div>
+
+        <!-- SETTINGS -->
+        <div id="settings" class="page">
+            <div class="settings-list">
+                <h3>Appearance</h3>
+                <button onclick="setTheme('dark')">🌌 Space Mode</button>
+                <button onclick="setTheme('light')">⚪ Space-Light</button>
+                <hr>
+                <h3>Backgrounds</h3>
+                <label>Main BG:</label> <input type="file" onchange="uploadImage('bg')">
+                <label>Star Layer:</label> <input type="file" onchange="uploadImage('star')">
+                <p>Brightness: <span id="brightVal">100%</span></p>
+                <input type="range" id="brightSlider" min="10" max="100" value="100" oninput="updateBrightness(this.value)">
+                <button onclick="resetBackgrounds()" style="background:#d32f2f;">Reset Photos</button>
+                <hr>
+                <h3>Stealth</h3>
+                <button onclick="cloakTab()">🚀 Ghost Tab</button>
+                <button onclick="disguise('Classes', 'https://gstatic.com')">🎭 Disguise</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- PILL NAV DOCK -->
+    <div id="dockContainer" style="display:none;">
+        <div id="dock">
+            <button onclick="openPage('home')">🏠</button>
+            <button onclick="openPage('games')">🎮</button>
+            <button onclick="openPage('proxy')">🌐</button>
+            <button onclick="openPage('music')">🎧</button>
+            <button onclick="openPage('settings')">⚙️</button>
+        </div>
+    </div>
+
+    <button id="panicBtn" onclick="panic()">📄 Study Mode</button>
+    <script src="app.js"></script>
+</body>
+</html>
